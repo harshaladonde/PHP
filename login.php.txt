@@ -1,0 +1,17 @@
+<?php
+session_start();
+include 'inc/functions.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = sanitize_input($_POST["username"]);
+    $password = sanitize_input($_POST["password"]);
+
+    if (login_user($username, $password)) {
+        $_SESSION["username"] = $username;
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Login failed. Please check your credentials.";
+    }
+}
+?>

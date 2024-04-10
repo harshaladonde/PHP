@@ -1,0 +1,26 @@
+<?php
+include 'db_config.php';
+
+function sanitize_input($input) {
+    return htmlspecialchars(trim($input));
+}
+
+function register_user($username, $email, $password) {
+    $conn = get_connection();
+    $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+    return $stmt->execute([$username, $email, $password]);
+}
+
+function login_user($username, $password) {
+    $conn = get_connection();
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->execute([$username]);
+    $user = $stmt->fetch();
+
+    if ($user && password_verify($password, $user['password'])) {
+        return true;
+    } else {
+        return false;
+    }
+}
+?>

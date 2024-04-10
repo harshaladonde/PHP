@@ -1,0 +1,18 @@
+<?php
+session_start();
+include 'inc/functions.php';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = sanitize_input($_POST["username"]);
+    $email = sanitize_input($_POST["email"]);
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+    if (register_user($username, $email, $password)) {
+        $_SESSION["username"] = $username;
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "Registration failed. Please try again.";
+    }
+}
+?>

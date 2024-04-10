@@ -1,0 +1,12 @@
+document.addEventListener("DOMContentLoaded", function() 
+{
+    document.getElementById("registerForm").addEventListener("submit", function(event) {
+        // Validate registration form fields here
+        // Example: Check if username, email, and password are not empty
+    });
+
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        // Validate login form fields here
+        // Example: Check if username and password are not empty
+    });
+});
